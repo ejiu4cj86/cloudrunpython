@@ -32,6 +32,7 @@ def index():
 def move(request: Request):
     # request.get_data()
     data = request.json()
+    print(f'test: {request} {data}')
     st = data['arena']['state']
     my = st['https://cloud-run-hackathon-python-hx5ruhwpla-uc.a.run.app']
     x = my['x']
