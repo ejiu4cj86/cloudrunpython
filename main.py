@@ -31,9 +31,9 @@ def index():
 @app.post("/")
 def move(request: Request):
     # request.get_data()
-	print(request)
-	print(request.json())
-	return moves[random.randrange(len(moves))]
+    print("request", request)
+    print("json", request.json())
+    return moves[random.randrange(len(moves))]
     data = request.json
     st = data['arena']['state']
     my = st['https://cloud-run-hackathon-python-hx5ruhwpla-uc.a.run.app']
