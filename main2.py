@@ -45,6 +45,7 @@ def move():
             if abs(st[i]['x'] - x) <= 3 and abs(st[i]['y'] - y) <= 3 and st[i] != my]
 
     if wasHit:
+        print(line)
         return moves[random.randrange(len(moves))]
     elif dir == 'E':
         for i in line:
