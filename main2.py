@@ -32,19 +32,19 @@ def index():
 def HitAction(dir, x, y , line):
     if dir == 'E':
         for i in line:
-            if i['x'] - 3 <= x < i['x'] and y == i['y']:
+            if i['x'] - 1 <= x < i['x'] and y == i['y']:
                 return turns[random.randrange(len(turns))]
     elif dir == 'N':
         for i in line:
-            if i['y'] + 3 >= y > i['y'] and x == i['x']:
+            if i['y'] + 1 >= y > i['y'] and x == i['x']:
                 return turns[random.randrange(len(turns))]
     elif dir == 'W':
         for i in line:
-            if i['x'] + 3 >= x > i['x'] and y == i['y']:
+            if i['x'] + 1 >= x > i['x'] and y == i['y']:
                 return turns[random.randrange(len(turns))]
     elif dir == 'S':
         for i in line:
-            if i['y'] - 3 <= y < i['y'] and x == i['x']:
+            if i['y'] - 1 <= y < i['y'] and x == i['x']:
                 return turns[random.randrange(len(turns))]
     return 'F'
 
