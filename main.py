@@ -31,8 +31,8 @@ def index():
 @app.post("/")
 def move(request: Request):
     # request.get_data()
-    data = request.json()
-    print(f'test: {request} {data}')
+    data = request.dict()
+    print(f'test: {data}')
     st = data['arena']['state']
     my = st['https://cloudrunpython-ujmnd5v4va-uc.a.run.app']
     x = my['x']
