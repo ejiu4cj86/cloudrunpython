@@ -32,37 +32,39 @@ def index():
 def move():
     # request.get_data()
     data = request.json
+    my_url = data['_links']['self']['href']
     st = data['arena']['state']
-    my = st['https://cloudrunpython-ujmnd5v4va-uc.a.run.app']
+    my = st[my_url]
     x = my['x']
     y = my['y']
     dir = my['direction']
     wasHit = my['wasHit']
     logger.info(my)
 
-    line = [{'x': st[i]['x'], 'y': st[i]['y'], 'direction': st[i]['direction'],} for i in st if st[i]['x'] == x or st[i]['y'] == y]
+    line = [{'x': st[i]['x'], 'y': st[i]['y'], 'direction': st[i]['direction'],} for i in st
+            if abs(st[i]['x'] - x) <= 3 and abs(st[i]['y'] - y) <= 3 and st[i] != my]
 
     if wasHit:
         return moves[random.randrange(len(moves))]
     elif dir == 'E':
         for i in line:
-            if i['x'] - 3 <= x < i['x']:
+            if i['x'] - 3 <= x < i['x'] and y == i['y']:
                 return 'T'
     elif dir == 'N':
         for i in line:
-            if i['y'] + 3 >= y > i['y']:
+            if i['y'] + 3 >= y > i['y'] and x == i['x']:
                 return 'T'
     elif dir == 'W':
         for i in line:
-            if i['x'] + 3 >= x > i['x']:
+            if i['x'] + 3 >= x > i['x'] and y == i['y']:
                 return 'T'
     elif dir == 'S':
         for i in line:
-            if i['y'] - 3 <= y < i['y']:
+            if i['y'] - 3 <= y < i['y'] and x == i['x']:
                 return 'T'
 
     return moves[random.randrange(len(moves))]
 
 if __name__ == "__main__":
-  app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8888)))
+  app.run(debug=False,host='0.0.0.0',port=int(os.environ.get('PORT', 8080)))
   
