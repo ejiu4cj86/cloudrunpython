@@ -23,10 +23,30 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 moves = ['F', 'L', 'R']
+turns = ['L', 'R']
 
 @app.route("/", methods=['GET'])
 def index():
     return "Let the battle begin!"
+
+def HitAction(dir, x, y , line):
+    if dir == 'E':
+        for i in line:
+            if i['x'] - 3 <= x < i['x'] and y == i['y']:
+                return turns[random.randrange(len(turns))]
+    elif dir == 'N':
+        for i in line:
+            if i['y'] + 3 >= y > i['y'] and x == i['x']:
+                return turns[random.randrange(len(turns))]
+    elif dir == 'W':
+        for i in line:
+            if i['x'] + 3 >= x > i['x'] and y == i['y']:
+                return turns[random.randrange(len(turns))]
+    elif dir == 'S':
+        for i in line:
+            if i['y'] - 3 <= y < i['y'] and x == i['x']:
+                return turns[random.randrange(len(turns))]
+    return 'F'
 
 @app.route("/", methods=['POST'])
 def move():
@@ -45,8 +65,7 @@ def move():
             if abs(st[i]['x'] - x) <= 3 and abs(st[i]['y'] - y) <= 3 and st[i] != my]
 
     if wasHit:
-        print(line)
-        return moves[random.randrange(len(moves))]
+        return HitAction(dir, x, y , line)
     elif dir == 'E':
         for i in line:
             if i['x'] - 3 <= x < i['x'] and y == i['y']:
