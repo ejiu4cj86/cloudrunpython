@@ -64,9 +64,7 @@ def move():
     line = [{'x': st[i]['x'], 'y': st[i]['y'], 'direction': st[i]['direction'],} for i in st
             if abs(st[i]['x'] - x) <= 3 and abs(st[i]['y'] - y) <= 3 and st[i] != my]
 
-    if wasHit:
-        return HitAction(dir, x, y , line)
-    elif dir == 'E':
+    if dir == 'E':
         for i in line:
             if i['x'] - 3 <= x < i['x'] and y == i['y']:
                 return 'T'
@@ -82,6 +80,8 @@ def move():
         for i in line:
             if i['y'] - 3 <= y < i['y'] and x == i['x']:
                 return 'T'
+    if wasHit:
+        return HitAction(dir, x, y , line)
 
     return moves[random.randrange(len(moves))]
 
