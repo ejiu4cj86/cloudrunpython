@@ -46,7 +46,7 @@ def HitAction(dir, x, y , line):
         for i in line:
             if i['y'] - 1 <= y < i['y'] and x == i['x']:
                 return turns[random.randrange(len(turns))]
-    return 'F'
+    return moves[random.randrange(len(moves))]
 
 @app.route("/", methods=['POST'])
 def move():
